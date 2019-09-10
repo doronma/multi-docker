@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t doronma/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true doronma/react-test npm test
+
+after_success:
+  - docker build -t doronma/multi-client ./client
+  - docker build -t doronma/multi-nginx ./nginx
+  - docker build -t doronma/multi-worker ./worker
+  - docker build -t doronma/multi-server ./server
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push doronma/multi-client
+  - docker push doronma/multi-nginx
+  - docker push doronma/multi-worker
+  - docker push doronma/multi-server
