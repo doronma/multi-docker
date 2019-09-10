@@ -14,7 +14,7 @@ after_success:
   - docker build -t doronma/multi-worker ./worker
   - docker build -t doronma/multi-server ./server
 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD1" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push doronma/multi-client
   - docker push doronma/multi-nginx
   - docker push doronma/multi-worker
