@@ -9,13 +9,13 @@ script:
   - docker run -e CI=true doronma/react-test npm test
 
 after_success:
-  - docker build -t doronma/multi-client ./client
-  - docker build -t doronma/multi-nginx ./nginx
-  - docker build -t doronma/multi-worker ./worker
-  - docker build -t doronma/multi-server ./server
+  - docker build -t doroncomputer/multi-client ./client
+  - docker build -t doroncomputer/multi-nginx ./nginx
+  - docker build -t doroncomputer/multi-worker ./worker
+  - docker build -t doroncomputer/multi-server ./server
 
-  - echo "$DOCKER_PASSWORD1" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push doronma/multi-client
-  - docker push doronma/multi-nginx
-  - docker push doronma/multi-worker
-  - docker push doronma/multi-server
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push doroncomputer/multi-client
+  - docker push doroncomputer/multi-nginx
+  - docker push doroncomputer/multi-worker
+  - docker push doroncomputer/multi-server
