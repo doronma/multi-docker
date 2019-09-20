@@ -19,3 +19,17 @@ after_success:
   - docker push doroncomputer/multi-nginx
   - docker push doroncomputer/multi-worker
   - docker push doroncomputer/multi-server
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-867433151820"
+  backet_path: "docker-multi"
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
